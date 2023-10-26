@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Website</title>
+    <!-- <link rel="stylesheet" href="style1.css" /> -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    />
+    <style>
+      * {
+        margin: 0px;
+        padding: 0px;
+        box-sizing: border-box;
+      }
+      section {
+        position: relative;
+        height: 100vh;
+        width: 100%;
+        background-image: url(img4.jpg);
+        background-size: cover;
+        background-position: center;
+      }
+      .form-container {
+        position: absolute;
+        top: 18%;
+        left: 37%;
+        background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3));
+        width: 350px;
+        height: 480px;
+        padding: 50px 30px;
+        border-radius: 15px;
+        box-shadow: 7px 7px 60px rgb(11, 11, 11);
+      }
+      .form-container h1 {
+        text-transform: uppercase;
+        font-size: 25px;
+        letter-spacing: 1px;
+        text-align: center;
+        margin-bottom: 20px;
+        margin-top: 10px;
+        color: rgb(221, 219, 219);
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      .item input {
+        width: 100%;
+        background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3));
+        border: none;
+        display: block;
+        padding: 10px;
+        margin-top: 5px;
+        outline: none;
+        font-size: 13px;
+      }
+      .item input::placeholder {
+        color: rgb(135, 134, 134);
+      }
+      .item input {
+        color: rgb(184, 193, 200);
+      }
+      button {
+        width: 100%;
+        padding: 10px;
+        background-color: #dc2626;
+        border: none;
+        margin-top: 10px;
+        color: aliceblue;
+        font-size: 15px;
+        font-family: sans-serif;
+        letter-spacing: 1.6px;
+        opacity: 0.8;
+        transition: all 0.2s;
+        margin-bottom: 20px;
+      }
+      button:hover {
+        opacity: 1;
+      }
+      a {
+        font-size: 12px;
+        letter-spacing: 1px;
+        color: rgb(155, 155, 251);
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        text-decoration: none;
+        font-size: bold;
+      }
+      .item p {
+        color: rgb(206, 205, 205);
+        font-size: 12px;
+        letter-spacing: 1px;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+      }
+    </style>
+  </head>
+  <body>
+    <section>
+      <div class="form-container">
+        <h1>Registration Form</h1>
+        <br />
+        <form onsubmit="signup()" id="reg_form">
+          <div class="item">
+            <input type="text" id="fname" placeholder="Name" /><br />
+            <input type="email" id="email" placeholder="Email Id" /><br />
+            <input type="password" id="pswd" placeholder="Password" /><br />
+            <input
+              type="password"
+              id="cpswd"
+              placeholder="Confirm Password"
+            /><br />
+            <button type="submit">Register</button><br />
+            <p>You have an account! <a href="login.html"> Login here...</a></p>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <script type="module">
+      // Import the functions you need from the SDKs you need
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-app.js";
+      import {
+        getAuth,
+        createUserWithEmailAndPassword,
+      } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-auth.js";
+      const firebaseConfig = {
+        apiKey: "AIzaSyCaJXEHLHlzfEfarIphXfVMQ2_-by21iDU",
+        authDomain: "loginproj-80c2c.firebaseapp.com",
+        projectId: "loginproj-80c2c",
+        storageBucket: "loginproj-80c2c.appspot.com",
+        messagingSenderId: "134132696664",
+        appId: "1:134132696664:web:d134b36731519ab88eec2d",
+        measurementId: "G-ZYYRCXTZGB",
+      };
+
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const auth = getAuth();
+
+      var fname = document.getElementById("fname");
+      var email = document.getElementById("email");
+      var pswd = document.getElementById("pswd");
+      var cpswd = document.getElementById("cpswd");
+
+      window.signup = function () {
+        if (
+          fname.value == "" ||
+          email.value == "" ||
+          pswd.value == "" ||
+          cpswd.value == ""
+        ) {
+          alert("Please fill all the fields");
+        } else if (pswd.value != cpswd.value) {
+          alert("Passwords does not match");
+        } else {
+          alert("You have successfully registered.");
+        }
+
+        event.preventDefault();
+
+        let obj = {
+          email: email.value,
+          password: pswd.value,
+        };
+        createUserWithEmailAndPassword(auth, obj.email, obj.password).then(
+          () => {
+            alert("User created successfullyy");
+            window.location.href = "login.html";
+          }
+        );
+      };
+    </script>
+  </body>
+</html>

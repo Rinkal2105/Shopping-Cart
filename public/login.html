@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Website</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    />
+  </head>
+  <body>
+    <section>
+      <div class="form-container">
+        <h1>Login Form</h1>
+        <br />
+        <!-- <form id="login_form" onsubmit="login()">
+          <div class="item">
+            <input type="email" name="email" placeholder="email" /><br />
+            <input
+              type="password"
+              name="password"
+              placeholder="Password"
+            /><br />
+            <button type="submit" value="submit">Login</button><br />
+            <p>
+              Don't have an account? <a href="index.html">Signup here...</a>
+            </p>
+          </div>
+        </form> -->
+        <form onsubmit="login()" id="login_form">
+          <div class="item">
+            <input type="email" id="email" placeholder="Email Id" /><br />
+            <input type="password" id="pswd" placeholder="Password" /><br />
+
+            <button type="submit">Login</button><br />
+            <p>
+              Don't have an account? <a href="index.html">Signup here...</a>
+            </p>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <script type="module">
+      // Import the functions you need from the SDKs you need
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-app.js";
+      import {
+        getAuth,
+        signInWithEmailAndPassword,
+      } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-auth.js";
+      const firebaseConfig = {
+        apiKey: "AIzaSyCaJXEHLHlzfEfarIphXfVMQ2_-by21iDU",
+        authDomain: "loginproj-80c2c.firebaseapp.com",
+        projectId: "loginproj-80c2c",
+        storageBucket: "loginproj-80c2c.appspot.com",
+        messagingSenderId: "134132696664",
+        appId: "1:134132696664:web:d134b36731519ab88eec2d",
+        measurementId: "G-ZYYRCXTZGB",
+      };
+
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const auth = getAuth();
+
+      var email = document.getElementById("email");
+      var pswd = document.getElementById("pswd");
+
+      window.login = function () {
+        if (email.value == "" || pswd.value == "") {
+          alert("Please fill all the fields");
+        }
+
+        event.preventDefault();
+
+        let obj = {
+          email: email.value,
+          password: pswd.value,
+        };
+
+        signInWithEmailAndPassword(auth, obj.email, obj.password).then(() => {
+          alert("Logged In...!");
+          window.location.href = "main.html";
+        });
+      };
+    </script>
+  </body>
+</html>
